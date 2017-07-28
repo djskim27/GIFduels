@@ -17,6 +17,7 @@ const UserSchema = new Schema({
   userName: String,
   email: String,
   gifs:[GifSchema]
+  
 
 });
 
