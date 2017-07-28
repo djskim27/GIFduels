@@ -8,7 +8,8 @@ var mongoose = require('mongoose');
 
 require('dotenv').config();
 
-mongoose.connect(process.env.MONGODB_URI); 
+// mongoose.connect(process.env.MONGODB_URI); 
+mongoose.connect('mongodb://localhost/GIFduels');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -48,5 +49,14 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+// const db = mongoose.connection;
+
+// db.on("error", (err) => {
+//   console.log(err);
+// });
+
+// db.once
+
 
 module.exports = app;

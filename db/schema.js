@@ -47,8 +47,8 @@ const userSchema = new Schema({
         unique: true,
         
     },
-    created_at: Date,
-    updated_at: Date,
+    // created_at: Date,
+    // updated_at: Date,
     gifs: [gifSchema]
 
 });
