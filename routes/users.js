@@ -3,11 +3,10 @@ const router = express.Router();
 
 const User = require('../models/user');
 
-
 // index router
 router.get('/', (req, res) => {
     User.find({}).then((users) => {
-      res.send(
+      res.render(
         'users/index',
         { users }
       );
@@ -22,6 +21,22 @@ router.get('/new', (req, res) => {
     res.render('users/new');
 });
 
-
+// Show route
+router.get('/:id', (req, res) => {
+  const userId = req.params.id;
+  User.findById(userId).then((user) => {
+    console.log(user);
+    res.render('users/show',
+    { 
+      userName: user.userName,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email
+    })
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+});
 
 module.exports = router;
