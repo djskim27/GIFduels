@@ -17,46 +17,65 @@ Battle.remove({}, function(err){
   console.log(err);
 });
 
+// Create new Gifs
+const gifOne = new Gif({
+  title: 'Hard',
+  imgUrl: 'https://media.giphy.com/media/BYhoMtJMQsYVy/giphy.gif',
+  votes: 0
+});
+
+
+// Create new users
+const jace = new User({
+  firstName: 'Jace',
+  lastName: 'Garcia',
+  userName: 'Weeeeee3',
+  email: 'funtimes@example.com',
+  gifs: [gifOne]
+});
+
+const david = new User({
+  firstName: 'David',
+  lastName: 'Kim',
+  userName: 'DavidThaMan',
+  email: "cool@example.com",
+  gifs: [gifOne]
+})
+
+
 // create new battles
 const danny = new Battle({
-  playerOne: [{
-    firstName: 'Jace',
-    lastName: 'Garcia',
-    userName: 'SuicideBySausage',
-    email: 'fuck you',
-    gifs: [{
-      title: 'Old Grandma',
-      imgUrl: 'https://media.giphy.com/media/l4KifsTQS8je40o9O/giphy.gif',
-      votes: 0
-    }]
-
-  }],
-  playerTwo: [{
-    firstName: 'David',
-    lastName: 'Kim',
-    userName: 'Jiggaboo',
-    email: "fuck me",
-    gifs: [{
-      title: 'Hard',
-      imgUrl: 'https://media.giphy.com/media/BYhoMtJMQsYVy/giphy.gif',
-      votes: 0
-    }]
-
-
-  }],
+  playerOne: jace,
+  playerTwo: david,
   playerOneVotes: 0,
   playerTwoVotes: 0,
 
 });
 
 
-// save the users
+// save the gif
+gifOne.save(function(err) {
+  if (err) console.log(err);
+    console.log("gif created!");
+});
+// save the user
+jace.save(function(err) {
+  if (err) console.log(err);
+    console.log("user jace created!");
+});
+
+david.save(function(err) {
+  if (err) console.log(err);
+    console.log("user david created!");
+});
+
+// save the battle
 danny.save(function(err) {
   if (err) console.log(err);
 
   console.log('danny created!');
 });
 
-
+// console.log(jace);
 console.log(danny);
 mongoose.connection.close();

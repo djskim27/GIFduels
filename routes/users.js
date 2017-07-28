@@ -3,13 +3,14 @@ const router = express.Router();
 
 const User = require('../models/user');
 
-
 // index router
 router.get('/', (req, res) => {
     User.find({}).then((users) => {
       res.render(
         'users/index',
-        { users }
+        { 
+          users
+         }
       );
     }).catch((error) => {
     console.log('Error retrieving users from database!');
@@ -21,10 +22,25 @@ router.get('/', (req, res) => {
 router.get('/new', (req, res) => {
     res.render('users/new');
 });
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
 
+// Show route
+router.get('/:id', (req, res) => {
+  const userId = req.params.id;
+  User.findById(userId).then((user) => {
+    console.log(user);
+    res.render('users/show',
+    { 
+      userId: user._id,
+      userName: user.userName,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      gif: user.gifs[0].imgUrl
+    })
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+});
 
 module.exports = router;

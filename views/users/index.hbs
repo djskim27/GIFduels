@@ -1,2 +1,10 @@
-<h1>{{title}}</h1>
-<p>FUCK YOU {{title}}</p>
+
+<h1>USERS</h1>
+
+<ul>{{#each users}}
+	<li>Username: <a href="/users/{{this._id}}">{{this.firstName}}</a></li>
+		
+{{/each}}
+	
+</ul>
+
