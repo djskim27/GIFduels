@@ -1,2 +1,12 @@
-<h1>{{title}}</h1>
-<p>FUCK YOU {{title}}</p>
+
+<h1>Users</h1>
+
+{{#each users}}
+    <div>
+        <div>First Name: {{this.first_name}}</div>
+        <div>Last Name: {{this.last_name}}</div>
+        <div>Email: {{this.email}}</div>
+    </div>
+{{/each}}
+
+<div><a href="/users/new">Create a new User</a></div>

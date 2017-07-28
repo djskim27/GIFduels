@@ -17,9 +17,28 @@ router.get('/', (req, res) => {
     });
 });
 
-//create user
+//create user form
 router.get('/new', (req, res) => {
     res.render('users/new');
+});
+
+//user show router
+router.get('/:id', (req, res) => {
+  const userIdToSearchDbFor = req.params.id;
+
+  User.findById(userIdToSearchDbFor).then((user) => {
+    console.log(user.items);
+    res.render(
+        'users/show',
+        {
+          user,
+          userItems: user.items
+        }
+    );
+  }).catch((error) => {
+    console.log(`Error retrieving user with ID of ${userIdToSearchDbFor}`);
+    console.log(error);
+  });
 });
 /* GET users listing. */
 router.get('/', function(req, res, next) {
