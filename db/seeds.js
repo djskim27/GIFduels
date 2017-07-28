@@ -1,62 +1,62 @@
-var mongoose = require("mongoose");
-// mongoose.connect(process.env.MONGODB_URI);
+var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/GIFduels');
-var Gif = require("../models/user");
-var User = require("../models/user");
-var Battle = require("../models/user");
 
+var Battle = require('../models/battle');
+var User = require('../models/user');
+var Gif = require('../models/gif')
+
+// Use native promises
 mongoose.Promise = global.Promise;
 
-//clear database of existing users
-User.remove({}, (err) => {
-    console.log(err);
-})
-
-
-//Create a new user
-var jace = new User({
-    firstName: "Jace",
-    lastName: "Garcia",
-    email: 'djs.kim27@gmail.com',
-    gifs: []
-    
+// First we clear the database of existing users and items.
+User.remove({}, function(err){
+  console.log(err);
 });
-var kim = new User({
-    firstName: "Kim",
-    lastName: "Lai",
-    email: 'djs.kim27@gmail.com',
-    gifs: []
-    
+
+Battle.remove({}, function(err){
+  console.log(err);
 });
-//Create a new battle
-var testBattle = new Battle({
-    userOne: 'korean',
-    userTwo: 'korean',
-    gifOneVotes: 0,
-    gifTwoVotes: 0,
-    winner: 'korean'
 
-})
+// create new battles
+var danny = new Battle({
+  playerOne: [{
+    firstName: 'Jace',
+    lastName: 'Garcia',
+    userName: 'SuicideBySausage',
+    email: 'fuck you',
+    gifs: [{
+      title: 'Old Grandma',
+      imgUrl: 'https://media.giphy.com/media/l4KifsTQS8je40o9O/giphy.gif',
+      votes: 0
+    }]
 
-jace.save((err) => {
-    if(err) console.log(err);
+  }],
+  playerTwo: [{
+    firstName: 'David',
+    lastName: 'Kim',
+    userName: 'Jiggaboo',
+    email: "fuck me",
+    gifs: [{
+      title: 'Hard',
+      imgUrl: 'https://media.giphy.com/media/BYhoMtJMQsYVy/giphy.gif',
+      votes: 0
+    }]
 
-    console.log(jace + ' created!');
 
-});
-kim.save((err) => {
-    if(err) console.log(err);
-
-    console.log(kim + ' created!');
+  }],
+  playerOneVotes: 0,
+  playerTwoVotes: 0,
 
 });
-testBattle.save((err)=> {
-    if (err) console.log(err);
-    
-    console.log(testBattle + "created");
-})
 
 
+// save the users
+danny.save(function(err) {
+  if (err) console.log(err);
+
+  console.log('danny created!');
+});
 
 
+console.log(danny);
 mongoose.connection.close();

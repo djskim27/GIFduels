@@ -1,102 +1,51 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+
+// Use native promises
 mongoose.Promise = global.Promise;
 
-//GIF Schema
-const gifSchema = new Schema({
-    title: {
+var GifSchema = new Schema({
+  title: String,
+  imgUrl: String,
+  votes: Number
 
-        type: String,
-        required: true,
-        unique: true
+})
 
-    },
-    imgUrl: {
-
-        type: String,
-        required: true,
-        unique: true
-
-    },
-    votes: {
-
-        type: Number
-
-    }
-});
-
-//User Schema
-const userSchema = new Schema({
-
-    firstName: {
-
-        type: String,
-        required: true
-
-    },
-    lastName: {
-
-        type: String,
-        required: true
-
-    },
-    email: {
-
-        type: String,
-        required: true,
-        unique: true,
-        
-    },
-    // created_at: Date,
-    // updated_at: Date,
-    gifs: [gifSchema]
+var UserSchema = new Schema({
+  firstName: String,
+  lastName: String,
+  userName: String,
+  email: String,
+  gifs:[GifSchema]
 
 });
 
-//Battle Schema
-const battleSchema = new Schema({
+var BattleSchema = new Schema({
+  created_at: Date,
+  updated_at: Date,
+  playerOne: [UserSchema],
+  playerTwo: [UserSchema],
+  playerOneVotes: Number,
+  playerTwoVotes: Number,
+  winner: UserSchema
+});
 
-    userOne: {
-
-        type: String,
-        required: true
-
-    },
-    userTwo: {
-
-        type: String,
-        required: true
-
-    },
-    gifOneVotes: {
-
-        type: Number,
-        required: true
-
-    },
-    gifTwoVotes: {
-        type: Number,
-        required: true
-    },
-    created_at: Date,
-    winner: {
-
-        type: String,
-        required: true,
-        
-    }
-
+BattleSchema.pre('save', function(next){
+  now = new Date();
+  this.updated_at = now;
+  if ( !this.created_at ) {
+    this.created_at = now;
+  }
+  next();
 });
 
 
-const Gif = mongoose.model('Gif', gifSchema);
-const User = mongoose.model('User', userSchema);
-const Battle = mongoose.model('Battle', battleSchema);
-//export GIFS with module.exports()
+var Battle = mongoose.model("Battle", BattleSchema);
+var User= mongoose.model("User", UserSchema);
+var Gif = mongoose.model("Gif", GifSchema)
+
 module.exports = {
-
-    Gif,
-    User,
-    Battle
-
-}
+  Battle,
+  User,
+  Gif
+};

@@ -1,5 +1,5 @@
-var Schema = require("../db/schema");
-var mongoose = require('mongoose');
+const Schema = require("../db/schema");
+const mongoose = require('mongoose');
 
-var Battle = Schema.Battle;
+const Battle = Schema.Battle;
 module.exports = Battle;
