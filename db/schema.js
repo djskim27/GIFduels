@@ -68,6 +68,16 @@ const battleSchema = new Schema({
         required: true
 
     },
+    gifOneVotes: {
+
+        type: Number,
+        required: true
+
+    },
+    gifTwoVotes: {
+        type: Number,
+        required: true
+    },
     created_at: Date,
     winner: {
 
