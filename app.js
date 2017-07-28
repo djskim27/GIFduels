@@ -8,7 +8,7 @@ const mongoose = require('mongoose');
 
 require('dotenv').config();
 
-// mongoose.connect(process.env.MONGODB_URI); 
+// mongoose.connect(process.env.MONGODB_URI);
 mongoose.connect('mongodb://localhost/GIFduels');
 
 const index = require('./routes/index');
@@ -34,7 +34,7 @@ app.use('/users', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
+  const err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
