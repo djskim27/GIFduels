@@ -71,7 +71,14 @@ router.put('/:id', (req, res) => {
 
     res.render(
         'users/show',
-        {user},
+          {
+        userId: user._id,
+        userName: user.userName,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        // gif: user.gifs[0].imgUrl
+      }
     );
   }).catch((error) => {
     console.log(`User with ID of ${user._id} failed to update!`);
@@ -98,7 +105,7 @@ router.get('/:id/edit', (req, res) => {
   User.findById(userIdToFind).then((user) => {
     res.render(
         'users/edit',
-        {user},
+        user
     );
   }).catch((error) => {
     console.log(`Error rendering edit form for user with ID of ${userIdToFind}`);
