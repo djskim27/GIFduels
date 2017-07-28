@@ -17,6 +17,21 @@ Battle.remove({}, function(err){
   console.log(err);
 });
 
+
+// Create new users
+const jace = new User({
+  firstName: 'Jace',
+  lastName: 'Garcia',
+  userName: 'SuicideBySausage',
+  email: 'fuck you',
+  gifs: [{
+    title: 'Old Grandma',
+    imgUrl: 'https://media.giphy.com/media/l4KifsTQS8je40o9O/giphy.gif',
+    votes: 0
+  }]
+})
+
+
 // create new battles
 const danny = new Battle({
   playerOne: [{
@@ -49,14 +64,19 @@ const danny = new Battle({
 
 });
 
+// save the user
+jace.save(function(err) {
+  if (err) console.log(err);
+    console.log("user jace created!");
+});
 
-// save the users
+// save the battle
 danny.save(function(err) {
   if (err) console.log(err);
 
   console.log('danny created!');
 });
 
-
+console.log(jace);
 console.log(danny);
 mongoose.connection.close();
