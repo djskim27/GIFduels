@@ -8,7 +8,9 @@ router.get('/', (req, res) => {
     User.find({}).then((users) => {
       res.render(
         'users/index',
-        { users }
+        { 
+          users
+         }
       );
     }).catch((error) => {
     console.log('Error retrieving users from database!');
