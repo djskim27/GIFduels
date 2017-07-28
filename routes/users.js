@@ -28,10 +28,12 @@ router.get('/:id', (req, res) => {
     console.log(user);
     res.render('users/show',
     { 
+      userId: user._id,
       userName: user.userName,
       firstName: user.firstName,
       lastName: user.lastName,
-      email: user.email
+      email: user.email,
+      gif: user.gifs[0].imgUrl
     })
     })
     .catch((error) => {
