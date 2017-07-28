@@ -1,9 +1,9 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/GIFduels');
 
-var Battle = require('../models/battle');
-var User = require('../models/user');
-var Gif = require('../models/gif')
+const Battle = require('../models/battle');
+const User = require('../models/user');
+const Gif = require('../models/gif')
 
 // Use native promises
 mongoose.Promise = global.Promise;
@@ -18,7 +18,7 @@ Battle.remove({}, function(err){
 });
 
 // create new battles
-var danny = new Battle({
+const danny = new Battle({
   playerOne: [{
     firstName: 'Jace',
     lastName: 'Garcia',

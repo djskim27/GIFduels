@@ -1,17 +1,17 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 // Use native promises
 mongoose.Promise = global.Promise;
 
-var GifSchema = new Schema({
+const GifSchema = new Schema({
   title: String,
   imgUrl: String,
   votes: Number
 
 })
 
-var UserSchema = new Schema({
+const UserSchema = new Schema({
   firstName: String,
   lastName: String,
   userName: String,
@@ -20,7 +20,7 @@ var UserSchema = new Schema({
 
 });
 
-var BattleSchema = new Schema({
+const BattleSchema = new Schema({
   created_at: Date,
   updated_at: Date,
   playerOne: [UserSchema],
@@ -40,9 +40,9 @@ BattleSchema.pre('save', function(next){
 });
 
 
-var Battle = mongoose.model("Battle", BattleSchema);
-var User= mongoose.model("User", UserSchema);
-var Gif = mongoose.model("Gif", GifSchema)
+const Battle = mongoose.model("Battle", BattleSchema);
+const User= mongoose.model("User", UserSchema);
+const Gif = mongoose.model("Gif", GifSchema)
 
 module.exports = {
   Battle,
