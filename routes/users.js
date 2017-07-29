@@ -28,8 +28,12 @@ router.post('/', (req, res) => {
     .then((user) => {
       res.render(
         'users/show', {
-          userId: user._id,
-          userName: user.userName
+        userId: user._id,
+        userName: user.userName,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email
+        // gif: user.gifs[0].imgUrl
         });
     }).catch((error) => {
       console.log('Error saving new user to database!');
@@ -47,7 +51,7 @@ router.get('/:id', (req, res) => {
         userName: user.userName,
         firstName: user.firstName,
         lastName: user.lastName,
-        email: user.email,
+        email: user.email
         // gif: user.gifs[0].imgUrl
       })
     })
@@ -80,7 +84,7 @@ router.get('/:id/edit', (req, res) => {
         userName: user.userName,
         firstName: user.firstName,
         lastName: user.lastName,
-        email: user.email,
+        email: user.email
         // gif: user.gifs[0].imgUrl
       }
       );
@@ -106,7 +110,7 @@ router.put('/:id', (req, res) => {
         userName: user.userName,
         firstName: user.firstName,
         lastName: user.lastName,
-        email: user.email,
+        email: user.email
         // gif: user.gifs[0].imgUrl
       }
     );

@@ -1,11 +1,10 @@
-
-<h1>Edit User</h1>
+<h1>
+    Edit User</h1>
 
 <form action="/users/{{userId}}?_method=PUT" method="POST">
     <input type="text" name="firstName" value="{{firstName}}">
     <input type="text" name="lastName" value="{{lastName}}">
-   <input type="text" name="userName" value="{{userName}}">
-    <input type="email" value="{{email}}" name="Email" required>
-     {{!-- <input type="text" name="gifs[0].imgUrl" value="{{gif}}"> --}}
+    <input type="text" name="userName" value="{{userName}}">
+    <input type="text" name="email" value="{{email}}"> {{!-- <input type="text" name="gif" value="{{gif}}"> --}}
     <a href="/users"><input type="submit" value="Edit"></a>
 </form>

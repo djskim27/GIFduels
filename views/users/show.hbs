@@ -1,15 +1,19 @@
 <h1>USER: {{userId}}</h1>
 
 <div>Username: {{userName}}</div>
+<div>First Name: {{firstName}}</div>
+<div>Last Name: {{lastName}}</div>
+<div>Email: {{email}}</div>
+{{!--
+<div>Imgurl: {{gif}}</div> --}} {{!--
+<div><img src="{{gif}}"></div> --}}
 
-
-<img src="{{gif}}">
 <div>
-<a href="/users">Back to User's index</a>
+    <a href="/users">Back to User's index</a>
 </div>
 <div>
-   <a href="/users/{{userId}}/delete">Delete</a> 
+    <a href="/users/{{userId}}/delete">Delete</a>
 </div>
 <div>
-   <a href="/users/{{userId}}/edit">Edit</a> 
+    <a href="/users/{{userId}}/edit">Edit</a>
 </div>
