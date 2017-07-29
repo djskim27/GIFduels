@@ -18,7 +18,8 @@ router.get('/', (req, res) => {
         firstName: user.firstName,
         lastName: user.lastName,
         email: user.email,
-        gifs: user.gifs
+        gifs: user.gifs,
+        gifId: user.gifs._id
 
         
 
@@ -31,29 +32,48 @@ router.get('/', (req, res) => {
   });
 });
 
-// //create user
-// router.get('/new', (req, res) => {
-//   res.render('users/new');
-// });
+//Create Gif Form
+router.get('/new', (req, res) => {
+  const userId = req.params.id;
 
-// router.post('/', (req, res) => {
-//   const newUserForm = req.body;
-//   User.create(newUserForm)
-//     .then((user) => {
-//       res.render(
-//         'users/show', {
-//         gifId: user._id,
-//         userName: user.userName,
-//         firstName: user.firstName,
-//         lastName: user.lastName,
-//         email: user.email
-//         // gif: user.gifs[0].imgUrl
-//         });
-//     }).catch((error) => {
-//       console.log('Error saving new user to database!');
-//       console.log(error);
-//     })
-// })
+  res.render(
+    'gifs/new',
+    {userId},
+  );
+});
+//POST ROUTE *****NOT WORKING CORRECTLY******
+router.post('/', (req, res) => {
+  const userId = req.params.id;
+  const newGifInfo = req.body;
+  var currentGif =[];
+
+
+  User.findById(userId).then((user) => {
+    const newGif = new Gif(newGifInfo);
+    console.log(newGif)
+    user.gifs.push(newGif);
+    currentGif.push(newGif);
+    return user.save();
+    
+
+  }).then((user) => {
+    console.log('SUCCESS');
+
+    res.render(
+      'gifs/show',
+      {
+        userId,
+        // userName: user.firstName,
+        // gifId: newGif._id,
+        title: currentGif[0].title,
+        imgUrl: currentGif[0].imgUrl
+      }
+    );
+  }).catch((error) => {
+    console.log(error);
+  });
+    console.log(currentGif)
+});
 
 // Show route
 router.get('/:gifId', (req, res) => {
@@ -64,7 +84,7 @@ router.get('/:gifId', (req, res) => {
     const foundGif = user.gifs.find((gif) => {
         return gif.id === gifId;
     });
-
+    // res.send(foundGif)
     res.render(
       'gifs/show',
       {

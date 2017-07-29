@@ -1,10 +1,9 @@
-{{!-- <h1>{{userName}}'s GIFS</h1> --}}
+ <h1>{{userName}}'s GIFS</h1> 
 
 {{#each gifs}}
-    <div>Title: {{this.title}}</div>
-    <div><img src="{{this.imgUrl}}"></div>
-    <div>Votes: {{this.votes}}</div>
+    
+    <div><a href="/users/{{../userId}}/gifs/{{this._id}}"><img src="{{this.imgUrl}}"></a></div>
+   
 {{/each}}
 
 	
-</ul>
