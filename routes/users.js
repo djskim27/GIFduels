@@ -48,7 +48,7 @@ router.get('/:id', (req, res) => {
         firstName: user.firstName,
         lastName: user.lastName,
         email: user.email,
-        gif: user.gifs[0].imgUrl
+        // gif: user.gifs[0].imgUrl
       })
     })
     .catch((error) => {
@@ -81,6 +81,7 @@ router.get('/:id/edit', (req, res) => {
         firstName: user.firstName,
         lastName: user.lastName,
         email: user.email,
+        // gif: user.gifs[0].imgUrl
       }
       );
     })
@@ -106,7 +107,7 @@ router.put('/:id', (req, res) => {
         firstName: user.firstName,
         lastName: user.lastName,
         email: user.email,
-        gif: user.gifs[0].imgUrl
+        // gif: user.gifs[0].imgUrl
       }
     );
   }).catch((error) => {
