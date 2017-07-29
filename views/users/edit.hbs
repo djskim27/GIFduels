@@ -2,9 +2,10 @@
 <h1>Edit User</h1>
 
 <form action="/users/{{userId}}?_method=PUT" method="POST">
-    <input type="text" name="firstName" placeholder="{{user.firstName}}">
-    <input type="text" name="lastName" placeholder="{{user.lastName}}">
-   <input type="text" name="userName" placeholder="Username">
-    <input type="email" placeholder="email" name="Email" required>
+    <input type="text" name="firstName" value="{{firstName}}">
+    <input type="text" name="lastName" value="{{lastName}}">
+   <input type="text" name="userName" value="{{userName}}">
+    <input type="email" value="{{email}}" name="Email" required>
+     <input type="text" name="imgUrl" value="{{gif}}">
     <a href="/users"><input type="submit" value="Edit"></a>
 </form>

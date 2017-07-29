@@ -48,7 +48,7 @@ router.get('/:id', (req, res) => {
         firstName: user.firstName,
         lastName: user.lastName,
         email: user.email,
-        // gif: user.gifs[0].imgUrl
+        gif: user.gifs[0].imgUrl
       })
     })
     .catch((error) => {
@@ -56,6 +56,35 @@ router.get('/:id', (req, res) => {
     });
 });
 
+
+
+
+
+//Delete Route
+router.get('/:id/delete', (req, res) => {
+  const userIdToDelete = req.params.id;
+
+  User.findByIdAndRemove(userIdToDelete).then(() => {
+    console.log('HOORAY');
+    res.redirect('/users')
+  });
+});
+
+//Render Edit Form For User
+router.get('/:id/edit', (req, res) => {
+  const userIdToFind = req.params.id;
+  User.findById(userIdToFind)
+    .then( (user) => {
+      res.render('../views/users/edit', {
+        userId: user._id,
+        userName: user.userName,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+      }
+      );
+    })
+})
 //Update Route
 router.put('/:id', (req, res) => {
 
@@ -77,7 +106,7 @@ router.put('/:id', (req, res) => {
         firstName: user.firstName,
         lastName: user.lastName,
         email: user.email,
-        // gif: user.gifs[0].imgUrl
+        gif: user.gifs[0].imgUrl
       }
     );
   }).catch((error) => {
@@ -87,29 +116,5 @@ router.put('/:id', (req, res) => {
 
 });
 
-//Delete Route
-router.get('/:id/delete', (req, res) => {
-  const userIdToDelete = req.params.id;
-
-  User.findByIdAndRemove(userIdToDelete).then(() => {
-    console.log('HOORAY');
-    res.redirect('/users')
-  });
-});
-
-//Render Edit Form For User
-router.get('/:id/edit', (req, res) => {
-
-  const userIdToFind = req.params.id;
-
-  User.findById(userIdToFind).then((user) => {
-    res.render(
-        'users/edit',
-        user
-    );
-  }).catch((error) => {
-    console.log(`Error rendering edit form for user with ID of ${userIdToFind}`);
-  });
-});
 
 module.exports = router;
