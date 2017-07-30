@@ -90,6 +90,7 @@ router.get('/:gifId', (req, res) => {
       'gifs/show',
       {
         userId,
+        gifId,
         userName: user.userName,
         title: foundGif.title,
         imgUrl: foundGif.imgUrl,
@@ -103,19 +104,33 @@ router.get('/:gifId', (req, res) => {
 });
 });
 
+//Delete GIF
+router.get('/:gifId/delete', (req, res) => {
+  const userId = req.params.id;
+  const gifId = req.params.gifId;
 
+  User.findById(userId).then((user) => {
+    user.gifs.id(gifId).remove();
 
+    return user.save();
 
-
-// //Delete Route
-// router.get('/:id/delete', (req, res) => {
-//   const gifIdToDelete = req.params.id;
-
-//   User.findByIdAndRemove(gifIdToDelete).then(() => {
-//     console.log('HOORAY');
-//     res.redirect('/users')
-//   });
-// });
+  }).then((user) => {
+    res.render(
+      'gifs/index',
+      {
+        userId: user._id,
+        userName: user.userName,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        gifs: user.gifs,
+        gifId: user.gifs._id
+      }
+    );
+  }).catch((error) => {
+    console.log(error);
+  });
+});
 
 // //Render Edit Form For User
 // router.get('/:id/edit', (req, res) => {
