@@ -50,7 +50,8 @@ const david = new User({
 
 
 // create new battles
-const danny = new Battle({
+const battleOne = new Battle({
+  users:[jace, david],
   playerOne: jace,
   playerTwo: david,
   playerOneVotes: 0,
@@ -76,12 +77,12 @@ david.save(function(err) {
 });
 
 // save the battle
-danny.save(function(err) {
+battleOne.save(function(err) {
   if (err) console.log(err);
 
-  console.log('danny created!');
+  console.log('battleOne created!');
 });
 
 // console.log(jace);
-console.log(danny);
+console.log(battleOne);
 mongoose.connection.close();

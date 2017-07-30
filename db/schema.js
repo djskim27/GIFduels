@@ -11,6 +11,7 @@ const GifSchema = new Schema({
 
 })
 
+
 const UserSchema = new Schema({
   firstName: String,
   lastName: String,
@@ -21,11 +22,13 @@ const UserSchema = new Schema({
 
 });
 
+
 const BattleSchema = new Schema({
   created_at: Date,
   updated_at: Date,
-  playerOne: [UserSchema],
-  playerTwo: [UserSchema],
+  users: [UserSchema],
+  playerOne: UserSchema,
+  playerTwo: UserSchema,
   playerOneVotes: Number,
   playerTwoVotes: Number,
   winner: UserSchema

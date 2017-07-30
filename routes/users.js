@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
+const Battle = require('../models/battle')
 const User = require('../models/user');
 
 // index router

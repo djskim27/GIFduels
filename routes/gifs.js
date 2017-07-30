@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router({mergeParams: true});
 
+const Battle = require
 const User = require('../models/user');
 const Gif = require('../models/gif');
 
@@ -119,6 +120,7 @@ router.get('/:gifId/edit', (req, res) =>{
     res.render('gifs/edit', {
       userId,
       gifId,
+      userName: user.userName,
       title: foundGif.title,
       imgUrl: foundGif.imgUrl
 
@@ -148,6 +150,7 @@ router.put('/:gifId', (req, res) => {
       {
         userId,
         gifId,
+        userName: user.userName,
         title: foundGif.title,
         imgUrl: foundGif.imgUrl
       }
