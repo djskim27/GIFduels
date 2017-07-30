@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-// mongoose.connect('mongodb://localhost/GIFduels');
-mongoose.connect(process.env.MONGODB_URI);
+mongoose.connect('mongodb://localhost/GIFduels');
+// mongoose.connect(process.env.MONGODB_URI);
 
 const Battle = require('../models/battle');
 const User = require('../models/user');
@@ -9,7 +9,7 @@ const Gif = require('../models/gif')
 // Use native promises
 mongoose.Promise = global.Promise;
 
-// First we clear the database of existing users and items.
+// First we clear the database of existing users, gifs, and battles.
 Gif.remove({}, function(err){
   console.log(err);
 });
