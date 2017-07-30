@@ -1,5 +1,9 @@
 const express = require('express');
-const router = express.Router();
+const router = express.Router({mergeParams: true});
+
+const Battle = require('..models/battle')
+const User = require('../models/user');
+const Gif = require('../models/gif');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
