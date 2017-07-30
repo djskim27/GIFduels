@@ -66,6 +66,7 @@ router.post('/', (req, res) => {
         userName: user.userName,
         // userName: user.firstName,
         // gifId: newGif._id,
+        gifId: currentGif[0]._id,
         title: currentGif[0].title,
         imgUrl: currentGif[0].imgUrl
       }
@@ -104,6 +105,60 @@ router.get('/:gifId', (req, res) => {
 });
 });
 
+
+//Edit Form For Gif
+router.get('/:gifId/edit', (req, res) =>{
+  const userId = req.params.id;
+  const gifId = req.params.gifId;
+
+  User.findById(userId).then((user) => {
+    const foundGif = user.gifs.find((gif) => {
+      return gif.id === gifId;
+    });
+
+    res.render('gifs/edit', {
+      userId,
+      gifId,
+      title: foundGif.title,
+      imgUrl: foundGif.imgUrl
+
+    });
+  });
+});
+
+//Update The Gif (PUT)
+router.put('/:gifId', (req, res) => {
+  const userId = req.params.id;
+  const gifId = req.params.gifId;
+
+  User.findById(userId).then((user) => {
+    const foundGif = user.gifs.find((gif) => {
+      return gif.id === gifId;
+    });
+
+    foundGif.title = req.body.title;
+    foundGif.imgUrl = req.body.imgUrl;
+
+    user.save();
+
+    console.log('SUCCESS');
+
+    return res.render(
+      'gifs/show',
+      {
+        userId,
+        gifId,
+        title: foundGif.title,
+        imgUrl: foundGif.imgUrl
+      }
+    );
+
+  }).catch((error) => {
+    console.log(error);
+  });
+  
+});
+
 //Delete GIF
 router.get('/:gifId/delete', (req, res) => {
   const userId = req.params.id;
@@ -118,7 +173,7 @@ router.get('/:gifId/delete', (req, res) => {
     res.render(
       'gifs/index',
       {
-        userId: user._id,
+        userId,
         userName: user.userName,
         firstName: user.firstName,
         lastName: user.lastName,
@@ -132,22 +187,6 @@ router.get('/:gifId/delete', (req, res) => {
   });
 });
 
-// //Render Edit Form For User
-// router.get('/:id/edit', (req, res) => {
-//   const gifIdToFind = req.params.id;
-//   User.findById(gifIdToFind)
-//     .then( (user) => {
-//       res.render('../views/users/edit', {
-//         gifId: user._id,
-//         userName: user.userName,
-//         firstName: user.firstName,
-//         lastName: user.lastName,
-//         email: user.email
-//         // gif: user.gifs[0].imgUrl
-//       }
-//       );
-//     })
-// })
 // //Update Route
 // router.put('/:id', (req, res) => {
 
