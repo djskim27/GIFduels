@@ -63,6 +63,7 @@ router.post('/', (req, res) => {
       'gifs/show',
       {
         userId,
+        userName: user.userName,
         // userName: user.firstName,
         // gifId: newGif._id,
         title: currentGif[0].title,
@@ -88,6 +89,8 @@ router.get('/:gifId', (req, res) => {
     res.render(
       'gifs/show',
       {
+        userId,
+        userName: user.userName,
         title: foundGif.title,
         imgUrl: foundGif.imgUrl,
         votes: foundGif.votes
