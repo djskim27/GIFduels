@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/GIFduels');
+// mongoose.connect('mongodb://localhost/GIFduels');
+mongoose.connect(process.env.MONGODB_URI);
 
 const Battle = require('../models/battle');
 const User = require('../models/user');
